@@ -1,2 +1,4 @@
 rootProject.name='jsoup'
 include ':app'
+include ':uikit'
+include ':xpath'

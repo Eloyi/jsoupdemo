@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="common_loading">Loading...</string>
+    <string name="common_load_failed">load more failed</string>
+    <string name="common_load_end">No more data</string>
+    <string name="common_load_complete">Click to load more</string>
+
+    <string name="common_refresh">refresh</string>
+    <string name="common_release_fresh">release to refresh</string>
+    <string name="common_refreshing">refreshing</string>
+    <string name="common_refresh_complete">refresh complete</string>
+
+
+    <string name="indicator_color_error">指示器的颜色只能设置成“@color/colorID or #000000”</string>
+    <string name="indicator_null_error">请先调用setIndicator()方法来设置指示器</string>
+    <string name="banner_adapter_null_error">Banner setAdapter() 参数不能为空</string>
+</resources>

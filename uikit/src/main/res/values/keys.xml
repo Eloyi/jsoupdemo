@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="key_color_badge">color_badge_background</string>
+    <string name="key_color_badge_text">color_badge_text</string>
+</resources>

@@ -1,0 +1,2 @@
+-keep class com.android.sanwei.uikit.banner.bean.** { *;}
+-keep interface com.android.sanwei.uikit.banner.bean.** { *;}

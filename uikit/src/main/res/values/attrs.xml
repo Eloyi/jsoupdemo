@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="BaseSWTheme">
+        <attr name="theme_background" format="string"/>
+        <attr name="theme_backgroundColor" format="string"/>
+        <attr name="theme_src" format="string"/>
+        <attr name="theme_text" format="string"/>
+        <attr name="theme_shape" format="string"/>
+        <attr name="theme_shape_strokecolor" format="string"/>
+        <attr name="theme_shape_solidcolor" format="string"/>
+
+        <!--  static resource value      -->
+        <attr name="theme_shape_strokeradius" format="integer"/>
+        <attr name="theme_shape_cornerradius" format="float"/>
+    </declare-styleable>
+
+
+    <declare-styleable name="BottomNavigationBar">
+        <attr name="bnbElevation" format="dimension" />
+        <attr name="bnbActiveColor" format="color" />
+        <attr name="bnbInactiveColor" format="color" />
+        <attr name="bnbBackgroundColor" format="color" />
+
+        <attr name="bnbActiveColorKey" format="string" />
+        <attr name="bnbInactiveColorKey" format="string" />
+        <attr name="bnbBackgroundColorKey" format="string" />
+
+
+        <attr name="bnbAnimationDuration" format="integer" />
+        <attr name="bnbMode" format="enum">
+            <enum name="mode_default" value="0" />
+            <enum name="mode_fixed" value="1" />
+            <enum name="mode_shifting" value="2" />
+            <enum name="mode_fixed_no_title" value="3" />
+            <enum name="mode_shifting_no_title" value="4" />
+        </attr>
+        <attr name="bnbBackgroundStyle" format="enum">
+            <enum name="background_style_default" value="0" />
+            <enum name="background_style_static" value="1" />
+            <enum name="background_style_ripple" value="2" />
+        </attr>
+        <attr name="bnbAutoHideEnabled" format="boolean" />
+    </declare-styleable>
+
+
+    <declare-styleable name="Banner">
+        <attr name="delay_time" format="integer" />
+        <attr name="is_auto_loop" format="boolean" />
+
+        <attr name="indicator_normal_width" format="dimension"/>
+        <attr name="indicator_selected_width" format="dimension"/>
+        <attr name="indicator_normal_color" format="color"/>
+        <attr name="indicator_selected_color" format="color"/>
+
+        <attr name="indicator_normal_color_key" format="string"/>
+        <attr name="indicator_selected_color_key" format="string"/>
+
+        <attr name="indicator_space" format="dimension"/>
+        <attr name="indicator_margin" format="dimension"/>
+        <attr name="indicator_marginLeft" format="dimension"/>
+        <attr name="indicator_marginTop" format="dimension"/>
+        <attr name="indicator_marginRight" format="dimension"/>
+        <attr name="indicator_marginBottom" format="dimension"/>
+        <attr name="indicator_gravity" format="enum">
+            <enum name="left" value="0" />
+            <enum name="center" value="1" />
+            <enum name="right" value="2" />
+        </attr>
+
+        <attr name="orientation">
+            <enum name="horizontal" value="0" />
+            <enum name="vertical" value="1" />
+        </attr>
+
+    </declare-styleable>
+</resources>
