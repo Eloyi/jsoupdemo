@@ -4,11 +4,30 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <Button
         android:id="@+id/searchbook"
         style="@style/DemoCommonButton"
         android:text="search book" />
-
+        <Button
+        android:id="@+id/insertbook"
+        style="@style/DemoCommonButton"
+        android:text="insert" />
+        <Button
+        android:id="@+id/querybook"
+        style="@style/DemoCommonButton"
+        android:text="query" />
+        <Button
+        android:id="@+id/updatebook"
+        style="@style/DemoCommonButton"
+        android:text="update" />
+        <Button
+        android:id="@+id/deletebook"
+        style="@style/DemoCommonButton"
+        android:text="deletebook" />
+    </LinearLayout>
 
     <com.android.eloy.jsoupdemo.reader.ReadView
         android:id="@+id/readview"

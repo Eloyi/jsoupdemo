@@ -8,10 +8,12 @@ import com.android.eloy.jsoupdemo.reader.BookFileManager
 import com.android.eloy.jsoupdemo.reader.OnPageStateChangedListener
 import com.android.eloy.jsoupdemo.reader.ReadView
 import com.android.eloy.jsoupdemo.reader.response.Chapter
+import com.android.eloy.jsoupdemo.reader.source.db.LocalBookInfo
 import com.android.eloy.jsoupdemo.reader.util.FileUtils
 import com.qy.reader.crawler.xpath.exception.XpathSyntaxErrorException
 import com.qy.reader.crawler.xpath.model.JXDocument
 import com.qy.reader.crawler.xpath.model.JXNode
+import io.realm.Realm
 import org.jsoup.Connection
 import org.jsoup.Jsoup
 import java.net.URLEncoder
@@ -228,6 +230,50 @@ class BookSearchActivity : AppCompatActivity() {
             R.id.searchbook -> {
                 searchBook()
             }
+            R.id.insertbook -> {
+                val realm = App.getRealm()
+                for (i in 0..3){
+                    val localbook = LocalBookInfo("key$i")
+                    localbook.author = "author $i"
+                    localbook.sourceKey = "sourceKey $i"
+                    localbook.bookName = "bookName $i"
+                    localbook.author = "author $i"
+                    localbook.categorylink = "categorylink $i"
+                    localbook.currentChapter = i
+                    localbook.currentPage = i
+                    localbook.saveToDB(realm)
+                }
+            }
+            R.id.deletebook -> {
+                val realm = App.getRealm()
+                val i = 0
+                val localbook = LocalBookInfo("key$i")
+                localbook.author = "author $i"
+                localbook.sourceKey = "sourceKey $i"
+                localbook.bookName = "bookName $i"
+                localbook.author = "author $i"
+                localbook.categorylink = "categorylink $i"
+                localbook.currentChapter = i
+                localbook.currentPage = i
+                localbook.deleteFromDB(realm)
+            }
+            R.id.updatebook -> {
+                val realm = App.getRealm()
+                val i = 0
+                val localbook = LocalBookInfo("key$i")
+                localbook.author = "author $i"
+                localbook.sourceKey = "sourceKey $i"
+                localbook.bookName = "bookName $i"
+                localbook.author = "author $i"
+                localbook.categorylink = "categorylink $i"
+                localbook.currentChapter = i + 1*100
+                localbook.currentPage = i+ 1*100
+                localbook.saveToDB(realm)
+            }
+            R.id.querybook -> {
+                LocalBookInfo.getLocalBookInfoList(App.getRealm())
+            }
+
         }
     }
 }
