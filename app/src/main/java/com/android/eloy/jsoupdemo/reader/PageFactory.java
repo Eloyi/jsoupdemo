@@ -60,6 +60,10 @@ public class PageFactory {
     private String sourceId;
     private String bookNum;
     private List<Chapter> chapters;
+    /**
+     * currentpage & currentChapter is from 1 to ... not 0,
+     *
+     */
     private int currentPage = 1;
     private int currentChapter = 1;
     private int chapterSize = 0;
@@ -149,12 +153,9 @@ public class PageFactory {
                             .map(FileChannel.MapMode.READ_ONLY, 0, mBufferLen);
                 }
             } catch (IOException e) {
-                Log.e("test", "234");
 //                LogUtils.e(e.toString());
             }
-            Log.i("TAGS", System.currentTimeMillis() + "");
             pages(chapterType);
-            Log.i("TAGS", System.currentTimeMillis() + "");
         }
     }
 
@@ -453,7 +454,9 @@ public class PageFactory {
         if (file.length() > 10) {
             return true;
         } else {
-            listener.onChapterLoadFailure(currentChapter);
+            if (listener != null) {
+                listener.onChapterLoadFailure(currentChapter, currentChapter -1);
+            }
             return false;
         }
     }
@@ -467,7 +470,10 @@ public class PageFactory {
         if (file.length() > 10) {
             return true;
         } else {
-            listener.onChapterLoadFailure(currentChapter - 2);
+            if (listener != null) {
+                listener.onChapterLoadFailure(currentChapter - 2, currentChapter -1);
+
+            }
             return false;
         }
     }

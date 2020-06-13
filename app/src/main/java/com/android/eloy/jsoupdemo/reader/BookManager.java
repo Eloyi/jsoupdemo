@@ -47,6 +47,14 @@ public class BookManager {
         return file;
     }
 
+    /**
+     *
+     * @param sourceKey 书源对应的key
+     * @param bookNum   书本对应的书id
+     * @param chapterName 章节名称
+     * @param content   内容
+     * @return
+     */
     public boolean saveContentFile(String sourceKey, String bookNum, String chapterName, String content) {
         File file = getContentFile(sourceKey, bookNum, chapterName);
         return FileIOUtils.writeFileFromString(file, content);

@@ -8,5 +8,5 @@ public interface OnPageStateChangedListener {
 
     void onPageChanged(int currentPage, int currentChapter);
 
-    void onChapterLoadFailure(int currentChapter);
+    void onChapterLoadFailure(int targetChapter, int currentChapter);
 }

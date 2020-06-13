@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.android.eloy.jsoupdemo.reader.BookManager
+import com.android.eloy.jsoupdemo.reader.OnPageStateChangedListener
 import com.android.eloy.jsoupdemo.reader.ReadView
 import com.android.eloy.jsoupdemo.reader.response.Chapter
 import com.android.eloy.jsoupdemo.reader.util.FileUtils
@@ -20,10 +21,44 @@ class BookSearchActivity : AppCompatActivity() {
     private val mReadView : ReadView by lazy {
         findViewById<ReadView>(R.id.readview)
     }
+
+    private var mBookCategoryList : List<Chapter> ?= null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         FileUtils.context = App.getContext()
         setContentView(R.layout.activity_booksearch)
+
+        //init readerview
+
+        mReadView.setOnPageStateChangedListener(object : OnPageStateChangedListener {
+            override fun onPageChanged(currentPage: Int, currentChapter: Int) {
+                Log.e("test", "onpagechanged currentpage $currentPage currentChapter $currentChapter")
+            }
+
+            override fun onChapterChanged(
+                currentChapter: Int,
+                fromChapter: Int,
+                fromUser: Boolean
+            ) {
+                Log.e("test", "onchapterchanged $currentChapter $fromChapter $fromUser")
+            }
+
+            override fun onCenterClick() {
+                Log.e("test", "oncenterclick")
+            }
+
+            override fun onChapterLoadFailure(targetChapter: Int, currentChapter: Int) {
+                searchBookContent(targetChapter, mBookCategoryList!!) {
+                    if (currentChapter > targetChapter) {
+                        //open pre
+                        mReadView.preChapter()
+                    }else if (currentChapter < targetChapter){
+                        //open next
+                        mReadView.nextChapter()
+                    }
+                }
+            }
+        })
     }
 
     fun searchBook(searchkey: String = "大魏宫廷") {
@@ -101,30 +136,38 @@ class BookSearchActivity : AppCompatActivity() {
         }
 
         //抓取单个章节数据
-        searchBookContent(resultList!![1], resultList)
+
+        mBookCategoryList = resultList
+
+        searchBookContent(0, resultList!!)
     }
 
-    private fun searchBookContent(item: Chapter, bookCategoryList : List<Chapter>) {
+    private fun searchBookContent(index: Int, bookCategoryList : List<Chapter>, listener : (()->Unit) ?=null) {
         //设置几种方案，网站schema+章节link, 查找到的link+章节link
         //方式一
-        val url = "https://www.zwdu.com" + item.link
 
-        val connect: Connection = Jsoup.connect(url)
-        val document = connect.validateTLSCertificates(false).get()
-        val jxDocument = JXDocument(document)
+        Thread{
+            val item = bookCategoryList[index]
+            val url = "https://www.zwdu.com" + item.link
 
-        val list = jxDocument.selN("//div[@id=content]/text()")
+            val connect: Connection = Jsoup.connect(url)
+            val document = connect.validateTLSCertificates(false).get()
+            val jxDocument = JXDocument(document)
 
-        val content = list[0]
+            val list = jxDocument.selN("//div[@id=content]/text()")
 
-        BookManager.getInstance().saveContentFile(item.sourceKey, "0", item.title, content.toString())
+            val content = list[0]
 
-        mReadView.initChapterList(item.sourceKey, "0", bookCategoryList, 2, 0)
+            BookManager.getInstance().saveContentFile(item.sourceKey, "0", item.title, content.toString())
 
-        mReadView.postInvalidate()
+            mReadView.initChapterList(item.sourceKey, "0", bookCategoryList, index + 1, 1)
 
+            listener?.invoke()
 
-        Log.e("test", "小说// $content")
+            Log.e("test", "小说// $content")
+
+        }.start()
+
     }
 
     private fun getCatItem(startNode: Any, baselink: String): List<Chapter>? {
