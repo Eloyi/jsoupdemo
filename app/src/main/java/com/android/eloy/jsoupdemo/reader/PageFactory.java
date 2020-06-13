@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -133,7 +132,7 @@ public class PageFactory {
             return;
         }
 
-        File file = BookManager.getInstance().getContentFile(sourceId, bookNum, chapters.get(chapterIndex - 1).title);
+        File file = BookFileManager.getInstance().getContentFile(sourceId, bookNum, chapters.get(chapterIndex - 1).title);
         if (file.length() > 10) {
             try {
                 if (chapterType == ChapterType.PREVIOUS) {
@@ -450,12 +449,12 @@ public class PageFactory {
             return false;
         }
 
-        File file = BookManager.getInstance().getContentFile(sourceId, bookNum, chapters.get(currentChapter).title);
+        File file = BookFileManager.getInstance().getContentFile(sourceId, bookNum, chapters.get(currentChapter).title);
         if (file.length() > 10) {
             return true;
         } else {
             if (listener != null) {
-                listener.onChapterLoadFailure(currentChapter, currentChapter -1);
+                listener.onChapterLoadFailure(currentChapter, currentChapter -1, chapters);
             }
             return false;
         }
@@ -466,12 +465,12 @@ public class PageFactory {
             return false;
         }
 
-        File file = BookManager.getInstance().getContentFile(sourceId, bookNum, chapters.get(currentChapter - 2).title);
+        File file = BookFileManager.getInstance().getContentFile(sourceId, bookNum, chapters.get(currentChapter - 2).title);
         if (file.length() > 10) {
             return true;
         } else {
             if (listener != null) {
-                listener.onChapterLoadFailure(currentChapter - 2, currentChapter -1);
+                listener.onChapterLoadFailure(currentChapter - 2, currentChapter -1, chapters);
 
             }
             return false;

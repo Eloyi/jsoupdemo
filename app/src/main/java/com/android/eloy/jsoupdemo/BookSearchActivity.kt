@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.android.eloy.jsoupdemo.reader.BookManager
+import com.android.eloy.jsoupdemo.reader.BookFileManager
 import com.android.eloy.jsoupdemo.reader.OnPageStateChangedListener
 import com.android.eloy.jsoupdemo.reader.ReadView
 import com.android.eloy.jsoupdemo.reader.response.Chapter
@@ -47,12 +47,12 @@ class BookSearchActivity : AppCompatActivity() {
                 Log.e("test", "oncenterclick")
             }
 
-            override fun onChapterLoadFailure(targetChapter: Int, currentChapter: Int) {
-                searchBookContent(targetChapter, mBookCategoryList!!) {
-                    if (currentChapter > targetChapter) {
+            override fun onChapterLoadFailure(targetChapter: Int, currentChapter: Int, chapters: List<Chapter>) {
+                searchBookContent(targetChapter, chapters) {
+                    if (currentChapter == targetChapter + 1) {
                         //open pre
                         mReadView.preChapter()
-                    }else if (currentChapter < targetChapter){
+                    }else if (currentChapter == targetChapter -1){
                         //open next
                         mReadView.nextChapter()
                     }
@@ -158,7 +158,7 @@ class BookSearchActivity : AppCompatActivity() {
 
             val content = list[0]
 
-            BookManager.getInstance().saveContentFile(item.sourceKey, "0", item.title, content.toString())
+            BookFileManager.getInstance().saveContentFile(item.sourceKey, "0", item.title, content.toString())
 
             mReadView.initChapterList(item.sourceKey, "0", bookCategoryList, index + 1, 1)
 

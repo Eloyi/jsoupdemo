@@ -10,14 +10,14 @@ import java.io.File;
 /**
  * Created by yuyuhang on 2018/1/11.
  */
-public class BookManager {
+public class BookFileManager {
 
-    private static BookManager instance;
+    private static BookFileManager instance;
 
-    public static BookManager getInstance() {
+    public static BookFileManager getInstance() {
         if (instance == null) {
-            synchronized (BookManager.class) {
-                instance = new BookManager();
+            synchronized (BookFileManager.class) {
+                instance = new BookFileManager();
             }
         }
         return instance;
