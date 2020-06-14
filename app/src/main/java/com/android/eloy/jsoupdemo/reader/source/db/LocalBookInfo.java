@@ -10,6 +10,10 @@ import io.realm.RealmObject;
 import io.realm.RealmResults;
 import io.realm.annotations.PrimaryKey;
 
+/**
+ * all pojo want to save to db need extends RealmObject
+ * check saveToDB(),deleteFromDB()
+ */
 public class LocalBookInfo extends RealmObject implements Serializable {
 
     private static final long serialVersionUID = 2846959175386797400L;
@@ -52,7 +56,8 @@ public class LocalBookInfo extends RealmObject implements Serializable {
                 ", categorylink='" + categorylink + '\'' +
                 ", currentChapter=" + currentChapter +
                 ", currentPage=" + currentPage +
-                ", lastWatchTime='" + lastWatchTime + '\'' +
+                ", lastWatchTime=" + lastWatchTime +
+                ", extra1='" + extra1 + '\'' +
                 '}';
     }
 

@@ -22,9 +22,13 @@ public class App extends Application {
         super.onCreate();
         mContext = this;
 
+        //init realm
         Realm.init(this);
     }
 
+    /**
+     * if use same configutation need use same realm
+     */
     public static Realm getRealm(){
         if (realm == null) {
             RealmConfiguration myConfig = new RealmConfiguration.Builder()

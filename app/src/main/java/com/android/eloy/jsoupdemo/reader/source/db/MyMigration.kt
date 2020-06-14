@@ -4,6 +4,9 @@ import android.util.Log
 import io.realm.DynamicRealm
 import io.realm.RealmMigration
 
+/**
+ * Realm migration
+ */
 class MyMigration : RealmMigration{
     override fun migrate(realm: DynamicRealm, oldVersion: Long, newVersion: Long) {
         Log.e("test", "migrate old $oldVersion new $newVersion")
